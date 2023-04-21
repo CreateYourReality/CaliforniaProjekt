@@ -35,6 +35,10 @@ $lightgrey: lightgrey;
 $whiteTranz:rgba(255, 255, 255, 0.2);
 
 
+$headlineSize:clamp(4.5rem,7vw,10rem);
+$stdTextSize:clamp(1rem,2vw,2rem);
+
+
 
 @mixin gridME($columns,$rows){
     display: grid;
@@ -44,7 +48,6 @@ $whiteTranz:rgba(255, 255, 255, 0.2);
 
 
 @mixin buttonME{
-    
     text-decoration: none;
     padding: 1.5vw 3vw;
     color:$white;
@@ -54,9 +57,30 @@ $whiteTranz:rgba(255, 255, 255, 0.2);
         background-color: $white;
         color:$black;
     }
-    
 }
 
+@mixin webkitTextBorder($width,$strokeColor,$textColor){
+    -webkit-text-stroke-width: $width;
+    -webkit-text-stroke-color: $strokeColor;
+    color:$textColor;
+}
+
+@mixin wrapME{
+    min-height: 100vh;
+    width: 100vw;
+}
+
+
+@mixin lineheightAndColor($color){
+    line-height: 3vw;
+    color:$color;
+}
+
+@mixin flexME{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* ##### ALLGEMEIN ##### */
 
@@ -72,28 +96,27 @@ img{
 }
 
 h1{
-    font-size: clamp(4.5rem,7vw,10rem);
-    line-height: 3vw;
+    font-size: $headlineSize;
+    @include lineheightAndColor($white)
 }
 
 h2{
-    font-size: clamp(4.5rem,7vw,10rem);
+    font-size: $headlineSize;
     color:$white;
 }
 
 h3{
     margin-bottom: 2vw;
     font-size: clamp(1rem,2vw,2rem);
-
 }
 
 p{
     font-family: WorkSans;
-    font-size: clamp(1rem,2vw,2rem);
+    font-size: $stdTextSize
 }
 
 a{
-    font-size: clamp(1rem,2vw,2rem);
+    font-size: $stdTextSize;
 
 }
 
@@ -101,9 +124,7 @@ a{
 
 header{
     @include gridME(2,3);
-    min-height: 100vh;
-    width: 100vw;
-    color: $white;
+    @include wrapME;
 
     .line{
         border-right: 1px solid $whiteTranz;
@@ -116,9 +137,7 @@ header{
         grid-area: 2 / 1 / 3 / 3;
         span{
             font-size: clamp(6rem,7vw,10rem);
-            -webkit-text-stroke-width:1px;
-            -webkit-text-stroke-color:white;
-            color:black;
+            @include webkitTextBorder(1px,$white,$black)
         }
         p{
             margin: 2.5vw 0;
@@ -129,21 +148,20 @@ header{
         display: flex;
         max-height: 26vw;
         grid-area: 3 / 1 / 4 / 2;
-        padding: 5vw 10vw 10vw 10vw;
+        padding: 2vw 10vw 10vw 10vw;
         img{
-            max-width: 15vw;
+            max-width: 6vw;
             height: 6vw;
         }
     }
     
     .header-right{
         grid-area: 3 / 2 / 4 / 3;
-        padding: 5vw 10vw 10vw 10vw;
+        padding: 2vw 10vw 10vw 10vw;
         a{
             float:right;
             @include buttonME;
         }
-
     }  
 }
 
@@ -152,8 +170,7 @@ header{
 
 
 #start-section{
-    min-height: 100vh;
-    width: 100vw;
+    @include wrapME;
     @include gridME(2,2);
 
         .start-sec-top{
@@ -168,16 +185,16 @@ header{
 
         .start-sec-stats{
             display: grid;
-            padding-left: 10rem;
+            padding-left: 10vw;
             width: 50vw;
             grid-area: 2 / 1 / 3 / 2;
 
             p{
-                font-size: clamp(2rem,2vw,3.5rem);
+                font-size: clamp(2rem,3.5vw,3.5rem);
                 margin-bottom: 1vw;
             }
             span{
-                font-size: clamp(3rem,4vw,5.5rem);
+                font-size: $headlineSize;
 
             }
         }
@@ -200,10 +217,9 @@ header{
 /* ##### STUCK IN MIDDLE ### */
 
 #stuckInMiddle-sec{
-    background-color: $white;
-    min-height: 100vh;
-    width: 100vw;
+    @include wrapME;
     @include gridME(3,6);
+    background-color: $white;
 
     img{
         width: 60%;
@@ -211,30 +227,27 @@ header{
 
     div{
         &:nth-of-type(1){
-            color:black;
             grid-area: 2 / 2 / 3 / 3;
             align-self: end;
             h2{
                 width: 28vw;
                 font-size: clamp(3.5rem, 5vw, 9.9rem);
-                color:black;
+                color:$black;
             }
         }
     }
 
     div{
         &:nth-of-type(2){
-            color:black;
+            @include lineheightAndColor($black);
             grid-area: 3 / 2 / 4 / 3;
             align-self: flex-start;
-            line-height: 3vw;
         }
     }
     div{
         &:nth-of-type(3){
-            margin-top: 3vw;
-            line-height: 3vw;
-            color:black;
+            @include lineheightAndColor($black);
+            margin-top: 6vw;
             grid-area: 5 / 2 / 6 / 3
         }
     }
@@ -271,25 +284,26 @@ header{
 
     img{
         &:nth-of-type(5){
-            margin-top: 5vw;
-            margin-left: -10vw;
+            margin-top: 10vw;
+            margin-left: -5vw;
             grid-area: 4 / 3 / 5 / 4 ;
         }
     }
 
     img{
         &:nth-of-type(6){
-            margin-top: 5vw;
+            margin-top: 5w;
             grid-area: 5 / 1 / 6 / 2 ;
         }
     }
 
     img{
         &:nth-of-type(7){
-            margin-left: -3vw;
+            margin-left: -12vw;
             align-self: flex-end;
             grid-area: 6 / 3 / 7 / 4 ;
             margin-bottom: -3vw;
+            width: 85%;
         }
     }
 
@@ -299,9 +313,9 @@ header{
 /* ##### GOLDEN BEAR SECTION ##### */
 
 #goldenBear-sec{
-    min-height: 100vh;
+    min-height: 73vw;
     width: 100vw;
-    background-color: black;
+    background-color: $black;
     position: relative;
 
     h2{
@@ -327,23 +341,20 @@ header{
     }
 
     .goldenBear-bot{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
+        @include flexME;
         margin-top: 5vw;
 
         img{
             &:nth-of-type(1){
                 width: 50vw;
-                margin-bottom: -15vw;
+                margin-bottom: -65vw;
             }
         }
 
         img{
             &:nth-of-type(2){
                 margin-left: -3vw;
-                margin-bottom: -10vw;
+                margin-bottom: -60vw;
                 width: 25vw;
             }
         }
@@ -353,16 +364,15 @@ header{
 /* ##### POPPY BEAR SEC ##### */
 
 #poppyBear-sec{
-    min-height: 100vh;
-    width: 100vw;
-    background-color: white;;
+    @include wrapME;
+    background-color: $white;;
     padding: 20vh 0;
     position: relative;
     overflow-x: hidden;
     z-index: -1;
 
     h2{
-        color:black;
+        color:$black;
         width: 50%;
     }
 
@@ -371,7 +381,7 @@ header{
         position: absolute;
         top: -10vw;
         right: -10vw;
-        animation: circleTurn 5s infinite linear;
+        animation: circleTurn 10s infinite linear;
     }
 
 
@@ -382,7 +392,7 @@ header{
 
         div{
             width: 40vw;
-            color:black;
+            color:$black;
             margin-bottom: 2vw;
             p{
                 font-size: clamp(1rem, 3vw, 4.5rem);
@@ -391,15 +401,13 @@ header{
         }
 
         span{
-            font-size: clamp(1rem,2vw,2rem);
+            font-size: $stdTextSize;
         }
     }
 
 
     .poppyBear-bot{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flexME;
 
         img{
             &:nth-of-type(1){
@@ -473,19 +481,16 @@ footer{
             z-index: -1;
             display: flex;
             align-items: center;
-            
 
             p{
-                color:black;
+                color:$black;
                 animation: animatedBanner 7s alternate infinite linear;
                 font-size: clamp(1rem,8.5vw,12rem);
                 font-family: Lora;
                 font-weight: 800;
                 white-space: nowrap;
                 span{
-                    -webkit-text-stroke-width:1px;
-                    -webkit-text-stroke-color:black;
-                    color:white;     
+                    @include webkitTextBorder(1px,$black,$white);
                 }
             }
         }
@@ -498,7 +503,6 @@ footer{
         width: 10vw;
         height: 3vw;
       }
-
     }
 }
 
