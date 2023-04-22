@@ -29,6 +29,7 @@ html {
   background-color: #000000;
   color: #ffffff;
   font-family: Lora;
+  overflow-x: hidden;
 }
 
 img {
